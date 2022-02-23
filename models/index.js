@@ -1,3 +1,3 @@
-const Network = require('./Network');
+const User = require('./User');
 
-module.exports = { Network };
+module.exports = { User };
