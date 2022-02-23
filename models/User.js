@@ -3,10 +3,28 @@ const mongoose = require('mongoose');
 
 // Construct a new instance of the schema class
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: false },
-  thoughts: {},
-  friends: {}
+    username: {
+        type: String,
+        unique: true,
+        required: [true, 'Please enter a username'],
+        trim: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: [true, 'Please enter an email'],
+        validate: {
+            validator: function (v) {
+                return /[a-zA-Z0-9]{1,}+@+[a-zA-Z]{1,}+\.+[a-zA-Z]{2,}/.test(v)
+            },
+            message: props => `${props.value} is not a valid email address, please enter a valid email address.`
+        }
+    },
+    thoughts: [thoughtSchema],
+    friends: [userSchema]
 });
+
+//Create user model via userSchema
+const User = model('user', userSchema);
 
 module.exports = User;
