@@ -1,8 +1,8 @@
 // Require schema and model from mongoose
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // Construct a new instance of the schema class
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId()
