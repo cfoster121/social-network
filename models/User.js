@@ -1,5 +1,7 @@
 // Require schema and model from mongoose
 const mongoose = require('mongoose');
+// Require thoughtSchema for 'thoughts' key
+const thoughtSchema = require('./Thought');
 
 // Construct a new instance of the schema class
 const userSchema = new mongoose.Schema({
@@ -24,8 +26,8 @@ const userSchema = new mongoose.Schema({
     friends: [userSchema]
 });
 
-//Create User model via userSchema
+// Create User model via userSchema
 const User = model('user', userSchema);
 
-//Export
+// Export
 module.exports = User;

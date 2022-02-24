@@ -1,5 +1,8 @@
 // Require schema and model from mongoose
 const mongoose = require('mongoose');
+// Require reactionSchema for 'reactions' key
+const reactionSchema = require('./Reaction');
+
 
 // Construct a new instance of the schema class
 const thoughtSchema = new mongoose.Schema({
@@ -10,7 +13,8 @@ const thoughtSchema = new mongoose.Schema({
         maxLength: 280
     },
     createdAt: {
-        date: Date
+        type: Date,
+        default: Date.now(),  
     },
     username: {
         type: String,
@@ -20,8 +24,8 @@ const thoughtSchema = new mongoose.Schema({
     reactions: [reactionSchema]
 })
 
-//Create Thought model via userSchema
+// Create Thought model via thoughtSchema
 const Thought = model('thought', thoughtSchema);
 
-//Export
+// Export
 module.exports = Thought;
