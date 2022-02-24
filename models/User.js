@@ -29,5 +29,13 @@ const userSchema = new mongoose.Schema({
 // Create User model via userSchema
 const User = model('user', userSchema);
 
+run()
+async function run(){
+    const user = await User.create({ username: 'testtest', email: 'text@aol.com'})
+    console.log(user)
+}
+
+
+
 // Export
 module.exports = User;
