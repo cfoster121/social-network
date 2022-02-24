@@ -18,12 +18,12 @@ const thoughtSchema = new Schema({
         unique: true,
         required: [true, 'Please enter a username'],
     },
-    reactions: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Reaction',
-        },
-    ],
+    // reactions: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Reaction',
+    //     },
+    // ],
 
 })
 

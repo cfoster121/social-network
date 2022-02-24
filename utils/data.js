@@ -9,5 +9,12 @@ const userSeeds = [
     }
 ]
 
+const thoughtSeeds = [
+    {
+        thoughtText: 'alpha beta gamma delta',
+        createdAt: '2022-02-22',
+        username: 'test123'
+    }
+]
 
-module.exports = { userSeeds };
+module.exports = { userSeeds, thoughtSeeds };
