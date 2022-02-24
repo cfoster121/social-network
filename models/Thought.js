@@ -1,8 +1,5 @@
 // Require schema and model from mongoose
 const mongoose = require('mongoose');
-// Require reactionSchema for 'reactions' key
-const reactionSchema = require('./Reaction');
-
 
 // Construct a new instance of the schema class
 const thoughtSchema = new mongoose.Schema({
@@ -14,14 +11,20 @@ const thoughtSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now(),  
+        default: Date.now(),
     },
     username: {
         type: String,
         unique: true,
         required: [true, 'Please enter a username'],
     },
-    reactions: [reactionSchema]
+    reactions: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Reaction',
+        },
+    ],
+
 })
 
 // Create Thought model via thoughtSchema
