@@ -23,8 +23,5 @@ const reactionSchema = new mongoose.Schema({
     }
 })
 
-// Create Reaction model via reactionSchema
-const Reaction = model('reaction', reactionSchema);
-
 // Export
-module.exports = Reaction;
+module.exports = reactionSchema;
