@@ -24,5 +24,20 @@ module.exports = {
                     : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
-    }
+    },
+
+    //Update a thought
+    updateThought(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $set: req.body }
+        )
+            .then((thought) =>
+                !course
+                    ? res.status(404).json({ message: 'No thought found' })
+                    : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+
 }
