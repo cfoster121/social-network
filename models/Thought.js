@@ -1,5 +1,6 @@
 // Require schema and model from mongoose
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction')
 
 // Construct a new instance of the schema class
 const thoughtSchema = new Schema({
@@ -18,18 +19,13 @@ const thoughtSchema = new Schema({
         unique: true,
         required: [true, 'Please enter a username'],
     },
-    reactions: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Reactions',
-        },
-    ],
+    reactions: [reactionSchema],
 })
 
-
-thoughtSchema.methods.reactionCount = function() {
-    console.log(`This thought has ${this.reactions.length} reactions!`)
-}
+//Virtual returns number of reactions for each thought
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length
+})
 
 
 // Create Thought model via thoughtSchema

@@ -7,16 +7,16 @@ connection.on('error', (err) => err);
 connection.once('open', async () => {
     console.log('connected');
 
-    const users = [];
-    const thoughts = [];
+    const users = userSeeds;
+    const thoughts = thoughtSeeds;
 
-    users.push({
-            userSeeds
-        });
+    // users.push({
+    //         userSeeds
+    //     });
 
-        thoughts.push ({
-            thoughtSeeds
-        });
+    //     thoughts.push ({
+    //         thoughtSeeds
+    //     });
 
     await User.collection.insertMany(users);    
 
