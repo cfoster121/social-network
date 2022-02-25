@@ -20,13 +20,20 @@ const thoughtSchema = new Schema({
         required: [true, 'Please enter a username'],
     },
     reactions: [reactionSchema],
-})
+},
+    {
+        toJSON: {
+            virtuals: true,
+        },
+        id:false
+    }
+)
 
 //Virtual returns number of reactions for each thought
-thoughtSchema.virtual('reactionCount').get(function() {
+thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length
 })
-
+// Thought.reactionCount
 
 // Create Thought model via thoughtSchema
 const Thought = model('thought', thoughtSchema);

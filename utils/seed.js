@@ -10,18 +10,10 @@ connection.once('open', async () => {
     const users = userSeeds;
     const thoughts = thoughtSeeds;
 
-    // users.push({
-    //         userSeeds
-    //     });
-
-    //     thoughts.push ({
-    //         thoughtSeeds
-    //     });
-
     await User.collection.insertMany(users);    
 
     await Thought.collection.insertMany(thoughts);
 
-    console.log(users);
+    console.log('\n 🌱 Seeding complete! 🌱 \n');
     process.exit(0);
 });
