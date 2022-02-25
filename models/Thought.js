@@ -18,14 +18,19 @@ const thoughtSchema = new Schema({
         unique: true,
         required: [true, 'Please enter a username'],
     },
-    // reactions: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'reactionSchema',
-    //     },
-    // ],
-
+    reactions: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Reactions',
+        },
+    ],
 })
+
+
+thoughtSchema.methods.reactionCount = function() {
+    console.log(`This thought has ${this.reactions.length} reactions!`)
+}
+
 
 // Create Thought model via thoughtSchema
 const Thought = model('thought', thoughtSchema);
