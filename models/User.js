@@ -15,16 +15,11 @@ const userSchema = new Schema({
         type: String,
         unique: true,
         required: [true, 'Please enter an email'],
-        // validate: {
-        //     validator: function (v) {
-        //         return /[a-zA-Z0-9]{1,}+@+[a-zA-Z]{1,}+\.+[a-zA-Z]{2,}/.test(v)
-        //     },
-        //     message: props => `${props.value} is not a valid email address, please enter a valid email address.`
-        // }
+        match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     },
     // thoughts: [thoughtSchema],
     friends: [this]
-}
+},
 );
 
 // Create User model via userSchema

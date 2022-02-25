@@ -48,5 +48,23 @@ module.exports = {
                     ? res.status(404).json({ message: 'No thought found' })
                     : res.json({ message: 'Thought deleted!' }))
             .catch((err) => res.status(500).json(err));
-    }
+    },
+
+    // Add reaction to a thought
+    createReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
+            { new: true },
+        )
+            .then((thought) =>
+                !thought
+                    ? res
+                        .status(404)
+                        .json({ message: 'No thought found' })
+                    : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+
 }
