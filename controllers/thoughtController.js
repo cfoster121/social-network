@@ -15,21 +15,21 @@ module.exports = {
             thoughtText: req.body.thoughtText,
             username: req.body.username
         })
-        .then(({Thought}) => {
-            return Users.findOneAndUpdate(
-                { _id: req.body.userId}, 
-                {$addToSet: {thoughts: Thought}}, 
-                {new: true}
+            .then((dbThoughtData) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: dbThoughtData._id } },
+                    { new: true }
                 );
-        })
-        .then(response => {
-            if(!response) {
-                res.status(404).json({message: 'Error'});
-                return;
-            }
-            res.json(response)
-        })
-        .catch(err => res.json(err)); 
+            })
+            .then(response => {
+                if (!response) {
+                    res.status(404).json({ message: 'Error' });
+                    return;
+                }
+                res.json(response)
+            })
+            .catch(err => res.json(err));
     },
 
     //Get single thought
@@ -88,7 +88,7 @@ module.exports = {
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: { _id: req.params.reactionId } } },
+            { $pull: { reactions: { reactionId: req.body.reactionId } } },
         )
             .then((user) =>
                 !user
