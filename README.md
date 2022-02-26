@@ -9,7 +9,7 @@ To use this app the user needs to run 'npm i' to install dependencies, 'npm run 
 
 ## Tutorial  
   
-  * Watch the tutorial [here](#)
+  * Watch the tutorial [here](https://youtu.be/LrXU0ppS5I4)
 
 ## Built With
 
