@@ -17,9 +17,20 @@ const userSchema = new Schema({
         required: [true, 'Please enter an email'],
         match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     },
-    // thoughts: [thoughtSchema],
+    thoughts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Thought',
+        },
+    ],
     friends: [this]
 },
+    {
+        toJSON: {
+            getters: true,
+        },
+    }
+
 );
 
 // Create User model via userSchema

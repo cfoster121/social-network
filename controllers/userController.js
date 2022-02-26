@@ -51,29 +51,11 @@ module.exports = {
     },
 
     // Add a friend to a user
-     addFriend(req, res) {
-         User.findOne({ _id: req.params.friendId })
-        .then((friend) =>
+    addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            //find user with id return document add to set
-            { $addToSet: { friends: res.json(friend) } },
-            { new: true },
-        ))
-            .then((user) =>
-                !user
-                    ? res
-                        .status(404)
-                        .json({ message: 'No user found' })
-                    : res.json(user)
-            )
-            .catch((err) => res.status(500).json(err));
-    },
-    // Remove a friend from a user
-    deleteFriend(req, res) {
-        User.findOneAndUpdate(
-            { _id: req.params.userId },
-            { $pull: { friends: req.params.friendId } },
+            { $addToSet: { friends: req.params.friendId } },
+            {new:true},
         )
             .then((user) =>
                 !user
@@ -84,4 +66,21 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-}
+
+
+        // Remove a friend from a user
+        deleteFriend(req, res) {
+            User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: req.params.friendId } },
+            )
+                .then((user) =>
+                    !user
+                        ? res
+                            .status(404)
+                            .json({ message: 'No user found' })
+                        : res.json(user)
+                )
+                .catch((err) => res.status(500).json(err));
+        },
+    }

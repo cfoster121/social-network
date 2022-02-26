@@ -1,4 +1,5 @@
-const { Thought } = require('../models');
+const { createDecipheriv } = require('crypto');
+const { Thought, User } = require('../models');
 
 module.exports = {
     // Get all thoughts
@@ -10,9 +11,25 @@ module.exports = {
 
     // Create new thought
     createThought(req, res) {
-        Thought.create(req.body)
-            .then((thought) => res.json(thought))
-            .catch((err) => res.status(500).json(err));
+        Thought.create({
+            thoughtText: req.body.thoughtText,
+            username: req.body.username
+        })
+        .then(({Thought}) => {
+            return Users.findOneAndUpdate(
+                { _id: req.body.userId}, 
+                {$addToSet: {thoughts: Thought}}, 
+                {new: true}
+                );
+        })
+        .then(response => {
+            if(!response) {
+                res.status(404).json({message: 'Error'});
+                return;
+            }
+            res.json(response)
+        })
+        .catch(err => res.json(err)); 
     },
 
     //Get single thought
@@ -71,7 +88,7 @@ module.exports = {
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: {_id: req.params.reactionId } }},
+            { $pull: { reactions: { _id: req.params.reactionId } } },
         )
             .then((user) =>
                 !user
