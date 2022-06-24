@@ -33,7 +33,7 @@ module.exports = {
             { $set: req.body }
         )
             .then((user) =>
-                !course
+                !user
                     ? res.status(404).json({ message: 'No user found' })
                     : res.json(user)
             )
